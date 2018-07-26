@@ -1,7 +1,9 @@
 ﻿//using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace BootCamp
 {
@@ -9,7 +11,8 @@ namespace BootCamp
     public class LogInSuccesFullExtended
     {
         //public IWebDriver driver = new ChromeDriver();
-        IWebDriver driver; 
+        IWebDriver driver;
+
 
         [SetUp]
         public void Initialize()
@@ -25,11 +28,17 @@ namespace BootCamp
         }
 
         [Test]
-        public void logInPageHeaderCheck()
+        public void LogInPageHeaderCheck()
         {
-
             IWebElement pageHeader = driver.FindElement(By.ClassName("page-heading"));
             Assert.AreEqual(pageHeader.Text, "MY ACCOUNT");
+        }
+
+        [Test]
+        public void LoginScreenCheck()
+        {
+            IWebElement pageHeader = driver.FindElement(By.ClassName("page-heading"));
+            Assert.AreNotEqual(pageHeader.Text, "AUTHENTICATION");
         }
 
         [TearDown]
