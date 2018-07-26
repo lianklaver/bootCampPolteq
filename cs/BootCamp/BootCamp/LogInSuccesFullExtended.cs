@@ -1,9 +1,7 @@
 ﻿//using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 
 namespace BootCamp
 {
@@ -12,7 +10,6 @@ namespace BootCamp
     {
         //public IWebDriver driver = new ChromeDriver();
         IWebDriver driver;
-
 
         [SetUp]
         public void Initialize()
@@ -39,6 +36,13 @@ namespace BootCamp
         {
             IWebElement pageHeader = driver.FindElement(By.ClassName("page-heading"));
             Assert.AreNotEqual(pageHeader.Text, "AUTHENTICATION");
+        }
+
+        [Test]
+        public void LogInUserInfoCheck()
+        {
+            IWebElement headerUserInfo = driver.FindElement(By.CssSelector("div[class='header_user_info']>a"));
+            Assert.AreEqual(headerUserInfo.Text, "Lianne Klaver");
         }
 
         [TearDown]
