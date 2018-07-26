@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -114,20 +115,79 @@ namespace BootCamp
             driver.FindElement(By.XPath("//a[contains(@class,'product-name')][contains(text(),'iPod shuffle')]")).Click();
             driver.FindElement(By.CssSelector("button[class='exclusive']")).Click();
 
-            IWebElement closeButton = driver.FindElement(By.CssSelector("span[title='Close window']"));
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 2));
-            wait.Until(ExpectedConditions.ElementToBeClickable(closeButton));
-            closeButton.Click();
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            wait.Until(ExpectedConditions.ElementToBeClickable(driver.FindElement(By.CssSelector("span[title='Close window']")))).Click();
 
-            driver.FindElement(By.CssSelector("div[class='shopping_cart']")).Click();
+            Thread.Sleep(1000);
+            driver.FindElement(By.CssSelector("[title='View my shopping cart']")).Click();
 
-            //driver.FindElement(By.CssSelector("div[class='layer_cart_product col-xs-12 col-md-6']>a")).Click();
-            driver.FindElement(By.ClassName("icon-trash")).Click();
+            wait.Until(ExpectedConditions.ElementToBeClickable(driver.FindElement(By.ClassName("icon-trash")))).Click();
 
             //Check if cart is empty
+            wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector("span[class='ajax_cart_no_product']")));
             Assert.IsTrue(driver.FindElement(By.CssSelector("span[class='ajax_cart_no_product']")).Displayed);
-
         }
     }
+
+    [TestFixture]
+    public class AdjustPersonalInfoTest : TestShopScenario
+    {
+        [Test]
+        public void ChangePersonalInformationCheck()
+        {
+            //IWebElement pageHeader = driver.FindElement(By.ClassName("page-heading"));
+            IWebElement headerUserInfo = driver.FindElement(By.CssSelector("div[class='header_user_info']>a"));
+
+            if (!headerUserInfo.Text.Equals("Lianne Klaver"))
+            {
+                //Path to log in
+                driver.FindElement(By.ClassName("login")).Click();
+                driver.FindElement(By.Id("email")).SendKeys("lianne.klaver@polteq.com");
+                driver.FindElement(By.Id("passwd")).SendKeys("Welkom01!");
+                driver.FindElement(By.Id("SubmitLogin")).Click();
+            }
+
+            driver.FindElement(By.CssSelector("[title='Manage my personal information']")).Click();
+
+            String naam2 = "Carla";
+            String naam1 = "Lianne";
+
+            IWebElement firstName = driver.FindElement(By.Id("firstname"));
+            Console.WriteLine(firstName);
+
+            if (firstName.GetAttribute("value").Equals(naam1))
+            {
+                firstName.Clear();
+                firstName.SendKeys(naam2);
+                driver.FindElement(By.Id("old_passwd")).SendKeys("Welkom01!");
+
+                //Thread.Sleep(5000);
+                driver.FindElement(By.Name("submitIdentity")).Click();
+
+                //Thread.Sleep(5000);
+
+                String check = naam2 + " Klaver"; 
+                headerUserInfo = driver.FindElement(By.CssSelector("div[class='header_user_info']>a"));
+                Assert.AreEqual(headerUserInfo.Text, check);
+            }
+            else
+            {
+                firstName.Clear();
+                firstName.SendKeys(naam1);
+                driver.FindElement(By.Id("old_passwd")).SendKeys("Welkom01!");
+
+                //Thread.Sleep(5000);
+                driver.FindElement(By.Name("submitIdentity")).Click();
+
+                //Thread.Sleep(5000);
+
+                String check = naam1 + " Klaver";
+                headerUserInfo = driver.FindElement(By.CssSelector("div[class='header_user_info']>a"));
+                Assert.AreEqual(headerUserInfo.Text, check);
+            }
+        }
+    }
+
+    
 
 }
