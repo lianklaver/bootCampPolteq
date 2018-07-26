@@ -3,6 +3,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace BootCamp
 {
@@ -51,8 +52,22 @@ namespace BootCamp
             driver.Navigate().GoToUrl("https://techblog.polteq.com/testshop/index.php");
             driver.Manage().Window.Maximize();
 
-            IWebElement empty = driver.FindElement(By.ClassName("pajax_cart_no_product"));
-            //Boolean visible = IsElementVisible(empty);
+            //Check if cart is empty
+            Assert.IsTrue(driver.FindElement(By.CssSelector("span[class='ajax_cart_no_product']")).Displayed);
+
+            //Add Ipod Shuffel to chart
+            driver.FindElement(By.CssSelector("a[class='tag_level3 first_item']")).Click();
+            driver.FindElement(By.XPath("//a[contains(@class,'product-name')][contains(text(),'iPod shuffle')]")).Click();
+            driver.FindElement(By.CssSelector("button[class='exclusive']")).Click();
+
+            IWebElement closeButton = driver.FindElement(By.CssSelector("span[title='Close window']"));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 2));
+            wait.Until(ExpectedConditions.ElementToBeClickable(closeButton));
+            closeButton.Click();
+
+            //check 1 product in chart
+            Assert.AreEqual(driver.FindElement(By.CssSelector("span[class='ajax_cart_quantity unvisible']")).Text,"1");
+            //Assert.Greater(driver.FindElement(By.CssSelector("span[class='ajax_cart_quantity unvisible']")).GetAttribute("inline")),0, "Nothing in the chart"));
 
             driver.Close();
         }
