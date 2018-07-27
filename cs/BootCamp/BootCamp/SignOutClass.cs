@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
@@ -186,13 +187,33 @@ namespace BootCamp
         [Test]
         public void MacbookAirCheck()
         {
+            //select appleStore
+            var supplier = driver.FindElement(By.Name("supplier_list"));
+            var SelectElement = new SelectElement(supplier);
+            SelectElement.SelectByValue("https://techblog.polteq.com/testshop/index.php?id_supplier=1&controller=supplier");
 
-            driver.FindElement(By.Name("supplier_list")).Click();
+            // make a list of matching elements
+            IList<IWebElement> products = driver.FindElements(By.CssSelector("[id='center_column'] [class='product-name']"));
+
+            int numberOfMacbooks = 0;
+            List<String> items = new List<String>();
+
+            foreach (IWebElement product in products)
+            {
+                //add item to list
+                items.Add(product.Text);
+
+                if (product.Text.Contains("MacBook Air"))
+                {
+                    numberOfMacbooks++;
+                }
+            }
+
+            // assertion on list, also possible to look is list contains list
+            CollectionAssert.Contains(items, "MacBook Air");
+            Assert.GreaterOrEqual(numberOfMacbooks, 1);
+            }
 
         }
-    }
-
-
-
 
 }
