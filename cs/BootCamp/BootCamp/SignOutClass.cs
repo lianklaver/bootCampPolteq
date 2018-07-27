@@ -135,7 +135,7 @@ namespace BootCamp
         [Test]
         public void ChangePersonalInformationCheck()
         {
-            //IWebElement pageHeader = driver.FindElement(By.ClassName("page-heading"));
+            //check if logged in, if not, log in
             IWebElement headerUserInfo = driver.FindElement(By.CssSelector("div[class='header_user_info']>a"));
 
             if (!headerUserInfo.Text.Equals("Lianne Klaver"))
@@ -147,47 +147,52 @@ namespace BootCamp
                 driver.FindElement(By.Id("SubmitLogin")).Click();
             }
 
+            //click to personal information
             driver.FindElement(By.CssSelector("[title='Manage my personal information']")).Click();
+
 
             String naam2 = "Carla";
             String naam1 = "Lianne";
 
             IWebElement firstName = driver.FindElement(By.Id("firstname"));
-            Console.WriteLine(firstName);
+            String newname;
 
             if (firstName.GetAttribute("value").Equals(naam1))
             {
                 firstName.Clear();
-                firstName.SendKeys(naam2);
-                driver.FindElement(By.Id("old_passwd")).SendKeys("Welkom01!");
-
-                //Thread.Sleep(5000);
-                driver.FindElement(By.Name("submitIdentity")).Click();
-
-                //Thread.Sleep(5000);
-
-                String check = naam2 + " Klaver"; 
-                headerUserInfo = driver.FindElement(By.CssSelector("div[class='header_user_info']>a"));
-                Assert.AreEqual(headerUserInfo.Text, check);
+                newname = naam2; 
             }
             else
             {
                 firstName.Clear();
-                firstName.SendKeys(naam1);
-                driver.FindElement(By.Id("old_passwd")).SendKeys("Welkom01!");
-
-                //Thread.Sleep(5000);
-                driver.FindElement(By.Name("submitIdentity")).Click();
-
-                //Thread.Sleep(5000);
-
-                String check = naam1 + " Klaver";
-                headerUserInfo = driver.FindElement(By.CssSelector("div[class='header_user_info']>a"));
-                Assert.AreEqual(headerUserInfo.Text, check);
+                newname = naam1; 
             }
+
+            //enter new name in personal information
+            firstName.SendKeys(newname);
+            driver.FindElement(By.Id("old_passwd")).SendKeys("Welkom01!");
+            driver.FindElement(By.Name("submitIdentity")).Click();
+
+            //check if changed
+            String check = newname + " Klaver";
+            headerUserInfo = driver.FindElement(By.CssSelector("div[class='header_user_info']>a"));
+            Assert.AreEqual(headerUserInfo.Text, check);
         }
     }
 
-    
+    [TestFixture]
+    public class ValidateSupplierProductTest : TestShopScenario
+    {
+        [Test]
+        public void MacbookAirCheck()
+        {
+
+            driver.FindElement(By.Name("supplier_list")).Click();
+
+        }
+    }
+
+
+
 
 }
