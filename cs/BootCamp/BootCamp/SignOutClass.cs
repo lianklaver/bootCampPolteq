@@ -216,4 +216,18 @@ namespace BootCamp
 
         }
 
+    [TestFixture]
+    public class UniqueLocatorIpods : TestShopScenario
+    {
+
+        [Test]
+        public void UniqueLocatorCheck()
+        {
+            //locator for ipod in categories
+            driver.FindElement(By.CssSelector("[id='left_column'] [class='dynamized']>li>a:nth-child(1)"));
+        }
+
+    }
+
+
 }
