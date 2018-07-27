@@ -37,4 +37,5 @@ public class LogInSuccesFull {
         //Assert.assertEquals(pageHeading.getText(), "MY ACCOUNT");
         driver.quit();
     }
+
 }
