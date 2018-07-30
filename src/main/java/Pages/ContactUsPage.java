@@ -18,6 +18,7 @@ public class ContactUsPage {
     private By invalidEmailElement = By.cssSelector(".alert.alert-danger>ol>il");
     private By subjectDropDownMenu = By.id("id_contact");
 
+
     public ContactUsPage(WebDriver driver){
         this.driver = driver;
     }
