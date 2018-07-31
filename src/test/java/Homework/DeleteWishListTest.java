@@ -7,9 +7,7 @@ import Pages.WishListPage;
 import exercise_nine.TestShopScenario;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -17,26 +15,11 @@ import org.assertj.core.api.Assertions;
 
 import java.util.List;
 
-import static java.lang.Thread.sleep;
 
 public class DeleteWishListTest extends TestShopScenario {
 
-//    public WebDriver driver = new ChromeDriver();
-//
-//    public HomePage homePage = new HomePage(driver);
-//    public LogInPage logInPage = new LogInPage(driver);
-//    public MyAccountPage myAccountPage = new MyAccountPage(driver);
-//    public WishListPage wishListPage = new WishListPage(driver);
-
-//    public void openWishList(){
-//
-//    }
-
-    @Test
-    public void deleteFeelThePain(){
+    public void openWishList(){
         WebDriverWait wait = new WebDriverWait(driver, 10);
-
-        //openWishList();
         HomePage homePage = new HomePage(driver);
         driver.findElement(homePage.signInButton).click();
 
@@ -47,13 +30,17 @@ public class DeleteWishListTest extends TestShopScenario {
         MyAccountPage myAccountPage = new MyAccountPage(driver);
         wait.until(ExpectedConditions.elementToBeClickable(myAccountPage.wishlistButton));
         driver.findElement(myAccountPage.wishlistButton).click();
+    }
+
+    @Test
+    public void deleteFeelThePain(){
+        openWishList();
 
         WishListPage wishListPage = new WishListPage(driver);
         String itemName = "No Pain No Gain";
         wishListPage.deleteItem(itemName);
 
         Assertions.assertThat(wishListPage.itemOntheWishList(itemName)).as("Item " + itemName + "is not found on wishlist").isFalse();
-
     }
 
     public void lianneHaarTest() {
@@ -85,7 +72,6 @@ public class DeleteWishListTest extends TestShopScenario {
                 i = wishlist.size();
                 String button = "tbody tr[id='wishlist_" +number+"']>td[class*=delete]>a";
 
-                //wait.until(ExpectedConditions.alertIsPresent());
                 Alert alert = driver.switchTo().alert();
                 alert.accept();
             }
