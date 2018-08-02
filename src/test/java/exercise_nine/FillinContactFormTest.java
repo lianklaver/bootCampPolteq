@@ -1,6 +1,7 @@
 package exercise_nine;
 
 import Pages.ContactUsPage;
+import Pages.HomePage;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import org.assertj.core.api.Assertions;
@@ -10,8 +11,9 @@ public class FillinContactFormTest extends TestShopScenario {
 
     @Test
     public void FillinContact() {
-        //open contact page
-        driver.findElement(By.cssSelector("li#header_link_contact > a")).click();
+        //open the contact page
+        HomePage homePage = new HomePage(driver);
+        driver.findElement(homePage.contactUsButton).click();
 
         //Fill in contact form
         ContactUsPage contactUsPage = new ContactUsPage(driver);

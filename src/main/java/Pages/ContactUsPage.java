@@ -15,7 +15,7 @@ public class ContactUsPage {
     private By orderReferenceTextField = By.cssSelector("input#id_order");
     private By messageTextField = By.cssSelector("textarea#message");
     private By sendButton = By.cssSelector("button#submitMessage");
-    private By invalidEmailElement = By.cssSelector(".alert.alert-danger>ol>il");
+    private By invalidEntryElement = By.cssSelector(".alert.alert-danger>ol>il");
     private By subjectDropDownMenu = By.id("id_contact");
 
 
@@ -32,5 +32,9 @@ public class ContactUsPage {
         driver.findElement(orderReferenceTextField).sendKeys(orderReference);
         driver.findElement(messageTextField).sendKeys(message);
         driver.findElement(sendButton).click();
+    }
+
+    public String errorMessage(){
+        driver.findElement(invalidEntryElement)
     }
 }
