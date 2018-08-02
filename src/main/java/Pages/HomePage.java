@@ -9,6 +9,17 @@ public class HomePage {
 
     public By signInButton = By.className("login");
     public By contactUsButton = By.cssSelector("#contact-link > a");
+    private By userInfoField = By.className("login");
+
 
     public HomePage(WebDriver driver){ this.driver = driver; }
+
+    public boolean LoggedIn(){
+        if(driver.findElement(userInfoField).getText().equals("Sign in")){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 }
