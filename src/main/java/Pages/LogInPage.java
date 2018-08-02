@@ -2,7 +2,8 @@ package Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
+import org.assertj.core.api.Assertions;
+
 
 public class LogInPage {
 
@@ -21,5 +22,6 @@ public class LogInPage {
         driver.findElement(emailField).sendKeys(email);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(sumitButton).click();
+        Assertions.assertThat(driver.findElement(By.className("page-heading")).getText()).as("Log in went succesfully").isEqualTo("MY ACCOUNT");
     }
 }

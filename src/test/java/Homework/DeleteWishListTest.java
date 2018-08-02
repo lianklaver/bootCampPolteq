@@ -37,11 +37,14 @@ public class DeleteWishListTest extends TestShopScenario {
         openWishList();
 
         WishListPage wishListPage = new WishListPage(driver);
-        String itemName = "No Pain No Gain";
+        String itemName = "Fear the pain";
         wishListPage.deleteItem(itemName);
 
         Assertions.assertThat(wishListPage.itemOntheWishList(itemName)).as("Item " + itemName + "is not found on wishlist").isFalse();
     }
+
+
+
 
     public void lianneHaarTest() {
 
