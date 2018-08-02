@@ -40,6 +40,7 @@ public class NOK_FillInContactFormTest extends TestShopScenario {
         ContactUsPage contactUsPage = new ContactUsPage(driver);
         driver.findElement(contactUsPage.emailTextField).sendKeys("<nope>");
         //assertion op form error
+        System.out.println(driver.findElement(By.className("form-error")).getAttribute("class"));
 
         driver.findElement(contactUsPage.emailTextField).clear();
         driver.findElement(contactUsPage.emailTextField).sendKeys("bla@bla.nl");
