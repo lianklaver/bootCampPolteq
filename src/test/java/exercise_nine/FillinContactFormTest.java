@@ -21,5 +21,6 @@ public class FillinContactFormTest extends TestShopScenario {
 
         //Assertion if succes alert is shown
         Assertions.assertThat(driver.findElements(By.cssSelector("#center_column > p")).size()).as("Success alert is shown after sending").isEqualTo(1);
+
     }
 }
