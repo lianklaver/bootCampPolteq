@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite" parallel="none">
+    <test name="dataVar1Test">
+        <parameter name="email" value="lianne.klaver@polteq.com" />
+        <parameter name="password" value="Welkom01!" />
+        <parameter name="result" value="MY ACCOUNT" />
+        <classes>
+            <class name="dataDrivenLogIn.DataDrivenTestLogIn" />
+        </classes>
+    </test>
+    <test name="dataVar2Test">
+        <parameter name="email" value="lianne.klaver@polteq.com" />
+        <parameter name="password" value="Welkm01" />
+        <parameter name="result" value="AUTHENTICATION" />
+        <classes>
+            <class name="dataDrivenLogIn.DataDrivenTestLogIn" />
+        </classes>
+    </test>
+</suite>
