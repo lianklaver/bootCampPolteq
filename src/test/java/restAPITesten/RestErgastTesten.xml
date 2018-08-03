@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite" parallel="none">
+    <test name="dataVar1Test">
+        <parameter name="driver" value="max_verstappen" />
+        <classes>
+            <class name="restAPITesten.RestErgastTesten" />
+        </classes>
+    </test>
+</suite>
