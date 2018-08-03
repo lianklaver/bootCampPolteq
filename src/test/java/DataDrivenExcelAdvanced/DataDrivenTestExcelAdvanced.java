@@ -3,27 +3,14 @@ package DataDrivenExcelAdvanced;
 import Pages.ContactUsPage;
 import Pages.HomePage;
 import exercise_nine.TestShopScenario;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.DataFormatter;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-
-//excel imports
-
-
 public class DataDrivenTestExcelAdvanced extends TestShopScenario {
 
-   // @Parameters({"subject", "email", "orderID", "message", "succes"})
-    @Test
-            (dataProvider="ReadVariant") //It get values from ReadVariant function method
+    @Test(dataProvider="ReadVariant") //It get values from ReadVariant function method
     public void FillinContact(String subject, String email, String orderID, String message, String succes) throws Exception
     {
         //open the contact page

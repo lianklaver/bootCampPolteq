@@ -7,7 +7,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 
 public class ExcelReader {
 
@@ -18,9 +17,6 @@ public class ExcelReader {
 
 
     public static Object[][] getTableArray(String filePath, String sheetName, int iTestCaseRow)    throws Exception
-
-    //public static Object[][] ReadVariant() throws IOException
-
     {
         DataFormatter formatter = new DataFormatter();
 
