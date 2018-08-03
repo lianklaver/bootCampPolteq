@@ -1,5 +1,6 @@
 package exercises;
 
+import exercise_nine.TestShopScenario;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
@@ -8,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
-public class LogInSuccesFull {
+public class LogInSuccesFull extends TestShopScenario {
 
     @Test
     public void logInSuccesFull() {
@@ -37,4 +38,5 @@ public class LogInSuccesFull {
         //Assert.assertEquals(pageHeading.getText(), "MY ACCOUNT");
         driver.quit();
     }
+
 }
